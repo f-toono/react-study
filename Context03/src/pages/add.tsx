@@ -1,20 +1,18 @@
 import type { NextPage } from "next";
-import { ComponentProps, useContext } from "react";
-import { TodoContext } from "./_app";
+import { ComponentProps } from "react";
+import { useTodosDispatch } from "src/state/todo";
 
 const Add: NextPage = () => {
-  const { setTodos } = useContext(TodoContext);
+  const { addTodo } = useTodosDispatch();
+  console.log("rendered!");
 
   const handleSubmit: ComponentProps<"form">["onSubmit"] = (event) => {
     event.preventDefault();
     const text = event.currentTarget.text.value;
-    setTodos((prevTodos) => {
-      const newTodo = { id: prevTodos.length + 1, text, isDone: false };
-      return [...prevTodos, newTodo];
-      // 配列の後ろに追加
-    });
+    addTodo(text);
     event.currentTarget.reset();
   };
+
   return (
     <div>
       <h3>TODO追加</h3>

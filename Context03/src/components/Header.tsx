@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FC, useContext } from "react";
+import { FC } from "react";
 import { TodoCounter } from "./TodoCounter";
 
 export const Header: FC = () => {

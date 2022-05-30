@@ -1,23 +1,11 @@
 import type { NextPage } from "next";
-import { useContext } from "react";
-import { Todo } from "src/types";
-import { TodoContext } from "./_app";
+import { useTodos, useTodosDispatch } from "src/state/todo";
 
 // ジェネリクス
 const Home: NextPage = () => {
-  const { todos, setTodos } = useContext(TodoContext);
+  const todos = useTodos();
+  const { toggleIsDone } = useTodosDispatch();
 
-  const toggleIsDone = (id: Todo["id"]) => {
-    setTodos((prevTodos) => {
-      return prevTodos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, isDone: !todo.isDone };
-          // isDone以外はそのまま渡す
-        }
-        return todo;
-      });
-    });
-  };
   return (
     <div>
       <h3>TODO一覧</h3>
